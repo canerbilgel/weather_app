@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_strings.dart';
 
-// Uygulamanın üst kısmında yer alan karşılama bileşeni.
-// Günün saatine göre dinamik bir "Good Morning", "Good Afternoon" mesajını gösterir
-// Ayrıca sağ üstte şehir arama için bir buton bulunur.
+// Üst karşılama bileşeni
 class GreetingHeader extends StatelessWidget {
-  final String greeting;           // Günün saatine göre oluşturulmuş karşılama metni
+  final String greeting;
   final String formattedDate;
-  final VoidCallback onSearchPressed; // Şehir arama butonuna basıldığında çalışacak fonksiyon
+  final VoidCallback onSearchPressed;
 
   const GreetingHeader({
     required this.greeting,
@@ -18,54 +18,44 @@ class GreetingHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
-
-      // Kutunun görsel stili
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
+        color: AppColors.cardBg.withOpacity(0.9),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.shadow05(),
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),
         ],
       ),
-
-      // İçerik: karşılama metni - buton - tarih
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Üst satır: Selamlama ve arama butonu
+          // Selamlama + arama
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Günlük selamlama
               Text(
                 greeting,
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
               ),
-
-              // Şehir arama butonu
               IconButton(
-                icon: const Icon(Icons.travel_explore, size: 32, color: Colors.black87),
+                tooltip: AppStrings.searchTooltip,
+                icon: const Icon(Icons.travel_explore, size: 32, color: AppColors.iconPrimary),
                 onPressed: onSearchPressed,
               ),
             ],
           ),
-
           const SizedBox(height: 4),
-
-          // Alt satır: Tarih bilgisi
+          // Tarih
           Text(
             formattedDate,
-            style: const TextStyle(fontSize: 16, color: Colors.grey),
+            style: const TextStyle(fontSize: 16, color: AppColors.textMuted),
           ),
         ],
       ),
     );
   }
 }
-

@@ -1,71 +1,74 @@
 import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
+import '../constants/weather_type.dart';
 
-// Hava durumuna göre değişen arka plan fonksiyonu
-LinearGradient getGradientByWeather(String weatherMain) {
-  switch (weatherMain.toLowerCase()) {
-    case 'clear':
+/// Hava durumuna göre uygun LinearGradient döner.
+/// Renkler AppColors'tan alınır.
+LinearGradient getGradientByWeather(WeatherType type) {
+  switch (type) {
+    case WeatherType.clear:
       return const LinearGradient(
-        colors: [Color(0xFFfceabb), Color(0xFFf8b500)],
+        colors: [AppColors.clear1, AppColors.clear2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'clouds':
+    case WeatherType.clouds:
       return const LinearGradient(
-        colors: [Color(0xFFbdc3c7), Color(0xFF2c3e50)],
+        colors: [AppColors.clouds1, AppColors.clouds2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'rain':
-    case 'drizzle':
+    case WeatherType.rain:
+    case WeatherType.drizzle:
       return const LinearGradient(
-        colors: [Color(0xFF4b79a1), Color(0xFF283e51)],
+        colors: [AppColors.rain1, AppColors.rain2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'thunderstorm':
+    case WeatherType.thunderstorm:
       return const LinearGradient(
-        colors: [Color(0xFF141E30), Color(0xFF243B55)],
+        colors: [AppColors.thunderstorm1, AppColors.thunderstorm2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'snow':
+    case WeatherType.snow:
       return const LinearGradient(
-        colors: [Color(0xFF83a4d4), Color(0xFFb6fbff)],
+        colors: [AppColors.snow1, AppColors.snow2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'mist':
-    case 'fog':
-    case 'haze':
+    case WeatherType.mist:
+    case WeatherType.fog:
+    case WeatherType.haze:
       return const LinearGradient(
-        colors: [Color(0xFFcfd9df), Color(0xFFe2ebf0)],
+        colors: [AppColors.mist1, AppColors.mist2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'smoke':
-    case 'dust':
-    case 'sand':
-    case 'ash':
+    case WeatherType.smoke:
+    case WeatherType.dust:
+    case WeatherType.sand:
+    case WeatherType.ash:
       return const LinearGradient(
-        colors: [Color(0xFFb79891), Color(0xFF94716b)],
+        colors: [AppColors.smoke1, AppColors.smoke2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'squall':
+    case WeatherType.squall:
       return const LinearGradient(
-        colors: [Color(0xFF485563), Color(0xFF29323c)],
+        colors: [AppColors.squall1, AppColors.squall2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    case 'tornado':
+    case WeatherType.tornado:
       return const LinearGradient(
-        colors: [Color(0xFF3a3a3a), Color(0xFF000000)],
+        colors: [AppColors.tornado1, AppColors.tornado2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
-    default:
+    case WeatherType.unknown:
       return const LinearGradient(
-        colors: [Color(0xFFd7d2cc), Color(0xFF304352)],
+        colors: [AppColors.default1, AppColors.default2],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );

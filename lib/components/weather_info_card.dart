@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../models/weather_model.dart';
+import '../constants/app_strings.dart';
+import '../constants/app_colors.dart';
 
-// Hava durumu bilgilerini (nem, rüzgar, hissedilen sıcaklık) gösteren kart bileşeni.
-// 3 sütun şeklinde veriler simge açıklama değer olarak gösterilir.
+// Nem, rüzgar, hissedilen sıcaklığı gösterir.
 class WeatherInfoCard extends StatelessWidget {
-  final Weather weather; // Dışarıdan gelen hava durumu modeli
+  final Weather weather;
 
   const WeatherInfoCard({required this.weather, super.key});
 
@@ -14,53 +15,44 @@ class WeatherInfoCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 12),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
 
-      // Kartın görsel düzenlemesi
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBg,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.shadow05(),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
         ],
       ),
 
-      // 3 sütun: Nem, rüzgar, hissedilen sıcaklık
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // Nem bilgisi
           _buildColumn(
             Icons.water_drop_outlined,
-            "Humidity",
+            AppStrings.humidity,
             "${weather.humidity}%",
-            Colors.blue,
+            AppColors.iconBlue,
           ),
-
-          // Rüzgar hızı
           _buildColumn(
             Icons.air,
-            "Wind",
-            "${weather.windSpeed.toStringAsFixed(1)} m/s",
-            Colors.grey,
+            AppStrings.wind,
+            "${weather.windSpeed.toStringAsFixed(1)} ${AppStrings.windUnitMs}",
+            AppColors.iconGrey,
           ),
-
-          // Hissedilen sıcaklık
           _buildColumn(
             Icons.thermostat,
-            "Feels like",
-            "${weather.feelsLike.toStringAsFixed(0)}°C",
-            Colors.orange,
+            AppStrings.feelsLike,
+            "${weather.feelsLike.toStringAsFixed(0)}${AppStrings.tempUnitC}",
+            AppColors.iconOrange,
           ),
         ],
       ),
     );
   }
 
-  // Kart içindeki her veri sütununu oluşturan yardımcı widget.
-  // İkon açıklama metni değer bilgisi
   Widget _buildColumn(IconData icon, String label, String value, Color iconColor) {
     return Column(
       children: [
@@ -68,7 +60,7 @@ class WeatherInfoCard extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           label,
-          style: const TextStyle(fontSize: 20, color: Colors.black54),
+          style: const TextStyle(fontSize: 20, color: AppColors.textMuted),
         ),
         const SizedBox(height: 2),
         Text(
@@ -79,3 +71,4 @@ class WeatherInfoCard extends StatelessWidget {
     );
   }
 }
+
