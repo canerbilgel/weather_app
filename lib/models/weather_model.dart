@@ -7,6 +7,7 @@ class Weather {
   final int humidity;
   final DateTime? date;
   final double feelsLike;
+  final String main; //
 
   Weather({
     this.cityName,
@@ -16,7 +17,7 @@ class Weather {
     required this.humidity,
     required this.windSpeed,
     required this.feelsLike,
-
+    required this.main,
     this.date,
   });
 
@@ -29,7 +30,7 @@ class Weather {
       humidity: json['main']['humidity'],
       windSpeed: json['wind']['speed'].toDouble(),
       feelsLike: json['main']['feels_like'].toDouble(),
-
+      main: json['weather'][0]['main'],
     );
   }
 
@@ -42,7 +43,7 @@ class Weather {
       windSpeed: json['wind']['speed'].toDouble(),
       date: DateTime.parse(json['dt_txt']),
       feelsLike: json['main']['feels_like'].toDouble(),
-
+      main: json['weather'][0]['main'],
     );
   }
 }
